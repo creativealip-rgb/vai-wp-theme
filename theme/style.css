@@ -757,12 +757,21 @@ p { color: var(--ink-soft); }
     display: flex !important;
     position: absolute; top: 72px; left: 0; right: 0;
     flex-direction: column;
+    align-items: stretch;
     background: white;
-    padding: 24px; gap: 20px;
+    padding: 12px 24px 20px;
+    gap: 0;
     box-shadow: 0 20px 40px rgba(11,37,53,.18);
     border-top: 1px solid var(--line);
     z-index: 99;
   }
+  .nav--open a {
+    display: block;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+  }
+  .nav--open a:last-child { border-bottom: 0; }
   .menu-toggle { display: flex; }
   .price-card.is-featured { transform: none; }
   .testi-grid { columns: 2 320px; }
@@ -803,7 +812,7 @@ p { color: var(--ink-soft); }
   .brand-text strong { font-size: 18px; }
   .brand-text small { font-size: 9px; }
   .brand-icon { height: 32px; }
-  .header-row .btn { padding: 9px 14px; font-size: 12px; }
+  .header-row .btn { padding: 9px 14px; font-size: 12px; white-space: nowrap; }
   .header-row .btn svg { display: none; }
   .container { padding: 0 20px; }
   .hero { padding: 40px 0 60px; }

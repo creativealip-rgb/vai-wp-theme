@@ -28,18 +28,31 @@
   var toggle = document.querySelector('.menu-toggle');
   var nav = document.querySelector('.nav');
   var open = false;
+  function closeMenu() {
+    open = false;
+    nav.classList.remove('nav--open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  function openMenu() {
+    open = true;
+    nav.classList.add('nav--open');
+    toggle.setAttribute('aria-expanded', 'true');
+  }
   if (toggle && nav) {
-    toggle.addEventListener('click', function() {
-      open = !open;
-      nav.classList.toggle('nav--open', open);
-      toggle.setAttribute('aria-expanded', open);
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (open) closeMenu(); else openMenu();
     });
     nav.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() {
-        open = false;
-        nav.classList.remove('nav--open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
+      a.addEventListener('click', closeMenu);
+    });
+    // Click outside closes menu
+    document.addEventListener('click', function(e) {
+      if (open && !nav.contains(e.target) && !toggle.contains(e.target)) closeMenu();
+    });
+    // Escape key closes menu
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && open) closeMenu();
     });
   }
 
