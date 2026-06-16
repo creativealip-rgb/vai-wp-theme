@@ -1,0 +1,42 @@
+services:
+  wp:
+    image: wordpress:php8.2-apache
+    container_name: vai-wp
+    restart: unless-stopped
+    ports:
+      - "8091:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: vaiwp
+      WORDPRESS_DB_USER: vaiwp
+      WORDPRESS_DB_PASSWORD: vaiwp_secret_2026
+      WORDPRESS_TABLE_PREFIX: vai_
+    volumes:
+      - wp_data:/var/www/html
+      - ./theme:/var/www/html/wp-content/themes/vai-theme
+    depends_on:
+      - db
+    networks:
+      - vai-net
+
+  db:
+    image: mariadb:11
+    container_name: vai-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root_secret_2026
+      MARIADB_DATABASE: vaiwp
+      MARIADB_USER: vaiwp
+      MARIADB_PASSWORD: vaiwp_secret_2026
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - vai-net
+
+volumes:
+  wp_data:
+  db_data:
+
+networks:
+  vai-net:
+    driver: bridge

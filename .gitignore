@@ -1,0 +1,20 @@
+# WordPress
+wp-config.php
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local env
+.env
+.env.local
+
+# Docker
+docker-compose.override.yml
