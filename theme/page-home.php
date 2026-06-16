@@ -137,65 +137,72 @@ get_header();
 </section>
 
 <!-- SERVICES -->
-<section class="section fade-up" id="services">
+<section class="section fade-up section--services" id="services">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Services</span>
-      <h2>Nine ways we make<br>your day <em>easier</em>.</h2>
-      <p>From daily errands to executive support, our virtual assistants handle the work that actually moves your business forward — quietly and reliably.</p>
+      <h2>Three ways we <em>support</em> your day.</h2>
+      <p>From daily life to executive operations to business growth — pick a category and we'll match you with the right VA.</p>
     </div>
     <?php
-    // Group services into 3 categories for visual hierarchy + reduce cognitive load.
+    // 3 category cards (Personal / Executive / Business). Each card lists its
+    // services inline so visitors can scan the scope before clicking through.
     $service_groups = array(
       'Personal' => array(
         'lead'  => 'icon-personal-assistant.gif',
-        'desc'  => 'Lifestyle and personal support for busy individuals.',
+        'tag'   => 'For busy individuals',
+        'desc'  => 'Lifestyle and personal support so your time and headspace go where they matter most.',
         'items' => array(
-          array('icon-personal-assistant.gif','Personal Assistant','Daily tasks, lifestyle simplification — your right hand for everything non-strategic.'),
-          array('icon-travel.gif','Travel Management','Trip planning, hotels, rentals, and full itineraries — domestic and international.'),
+          'Personal Assistant — daily tasks and lifestyle simplification',
+          'Travel Management — trips, hotels, rentals, full itineraries',
         ),
       ),
       'Executive' => array(
         'lead'  => 'icon-executive-admin.gif',
-        'desc'  => 'Secretarial and operational support for leadership teams.',
+        'tag'   => 'For leadership teams',
+        'desc'  => 'Secretarial, research, and operational support that keeps leadership organized and on brand.',
         'items' => array(
-          array('icon-executive-admin.gif','Executive Administration','Secretarial and admin support that keeps your company organized, on time, and on brand.'),
-          array('icon-research.gif','Research &amp; Data Entry','Collect, analyze, and report — accurate research and clean data, on schedule.'),
-          array('icon-legal.gif','Legal Consultant','Document review, legal research, and government regulation guidance at fair rates.'),
+          'Executive Administration — admin that runs the company, not just the calendar',
+          'Research &amp; Data Entry — clean, accurate, on schedule',
+          'Legal Consultant — document review and regulatory guidance',
         ),
       ),
       'Business' => array(
         'lead'  => 'icon-marketing.gif',
-        'desc'  => 'Growth, brand, and event support for businesses.',
+        'tag'   => 'For growing companies',
+        'desc'  => 'Growth, brand, and event support that turns strategy into measurable awareness and revenue.',
         'items' => array(
-          array('icon-marketing.gif','Marketing &amp; Advertising','Strategies and campaigns to maximize your reach, sales, and brand visibility.'),
-          array('icon-social-media.gif','Social Media Management','Plan, implement, and monitor your social strategy with measurable awareness focus.'),
-          array('icon-event-planner.gif','Event Planner','Prep, oversee, and facilitate all event aspects — corporate or private occasions.'),
-          array('icon-customise.gif','Project Support','Customised duties tailored to your scope: project control, monitoring, office management.'),
+          'Marketing &amp; Advertising — campaigns that drive reach and sales',
+          'Social Media Management — planned, posted, measured',
+          'Event Planner — corporate and private, end to end',
+          'Project Support — customised scope: PMO, monitoring, office ops',
         ),
       ),
     );
-    foreach ($service_groups as $cat => $g):
     ?>
-    <div class="svc-group">
-      <div class="svc-group-head">
-        <div class="svc-group-icon"><img src="<?php echo vai_asset('photos/'.$g['lead']); ?>" alt="" loading="lazy"></div>
-        <div>
-          <h3 class="svc-group-title"><?php echo $cat; ?></h3>
-          <p class="svc-group-desc"><?php echo $g['desc']; ?></p>
+    <div class="svc-cats">
+      <?php foreach ($service_groups as $cat => $g): ?>
+      <a class="svc-cat" href="<?php echo esc_url(home_url('/services/#'.strtolower($cat))); ?>">
+        <div class="svc-cat-head">
+          <div class="svc-cat-icon"><img src="<?php echo vai_asset('photos/'.$g['lead']); ?>" alt="" loading="lazy"></div>
+          <div class="svc-cat-meta">
+            <h3 class="svc-cat-title"><?php echo esc_html($cat); ?></h3>
+            <span class="svc-cat-tag"><?php echo esc_html($g['tag']); ?></span>
+          </div>
         </div>
-      </div>
-      <div class="services-grid svc-group-grid">
-        <?php foreach ($g['items'] as $svc): ?>
-        <div class="svc-card">
-          <div class="svc-icon"><img src="<?php echo vai_asset('photos/'.$svc[0]); ?>" alt="" loading="lazy"></div>
-          <h3><?php echo $svc[1]; ?></h3>
-          <p><?php echo $svc[2]; ?></p>
-        </div>
-        <?php endforeach; ?>
-      </div>
+        <p class="svc-cat-desc"><?php echo $g['desc']; ?></p>
+        <ul class="svc-cat-list">
+          <?php foreach ($g['items'] as $item): ?>
+            <li><?php echo $item; ?></li>
+          <?php endforeach; ?>
+        </ul>
+        <span class="svc-cat-link">Learn more <span aria-hidden="true">→</span></span>
+      </a>
+      <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
+    <div class="section-foot">
+      <a class="btn btn--ghost" href="<?php echo esc_url(home_url('/services/')); ?>">View all services</a>
+    </div>
   </div>
 </section>
 
