@@ -3,24 +3,35 @@
 get_header();
 ?>
 
-<section class="hero" style="min-height:30vh; padding:80px 0 40px;">
+<!-- HERO -->
+<section class="hero" style="min-height:36vh; padding:80px 0 50px;">
   <div class="container" style="text-align:center;">
     <span class="hero-eyebrow">Get in touch</span>
     <h1>Let's build something<br><em>together</em>.</h1>
     <p class="hero-sub" style="max-width:640px; margin:18px auto 0;">
       Free consultation. We'll review your workload, recommend the right plan, and answer everything you need to know — no strings attached.
     </p>
+    <div class="svc-hero-stats" style="margin-top:40px;">
+      <div class="svc-hero-stat"><b>&lt; 2h</b><span>avg reply</span></div>
+      <div class="svc-hero-stat"><b>4</b><span>channels</span></div>
+      <div class="svc-hero-stat"><b>14+</b><span>years</span></div>
+      <div class="svc-hero-stat"><b>99%</b><span>satisfaction</span></div>
+    </div>
   </div>
 </section>
 
+<!-- CONTACT + FORM -->
 <section class="section">
   <div class="container">
     <div class="contact-grid">
       <!-- LEFT: form -->
       <div class="contact-form-wrap">
-        <span class="eyebrow">Inquiry form</span>
-        <h2 style="margin:14px 0 28px;">Send us a <em>message</em>.</h2>
-        <p style="color:var(--ink-soft); margin-bottom:32px;">We reply within 1 business day — usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.</p>
+        <div class="svc-detail-head" style="text-align:left; margin-bottom:32px; max-width:none;">
+          <span class="svc-detail-num" style="left:-8px; top:-12px;">01</span>
+          <span class="svc-detail-tag" style="margin:0;">Inquiry form</span>
+          <h2 style="margin:8px 0 12px;">Send us a <em>message</em>.</h2>
+          <p style="color:var(--ink-soft);">We reply within 1 business day — usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.</p>
+        </div>
 
         <form id="vaiContactForm" class="vai-form" novalidate aria-label="Contact form">
           <div class="form-row">
@@ -143,11 +154,18 @@ get_header();
 
         <div class="contact-faq">
           <span class="eyebrow">Quick answers</span>
-          <ul>
-            <li><strong>How quickly do you reply?</strong> Within 1 business day, often same day.</li>
-            <li><strong>Do you sign NDAs?</strong> Yes, before kickoff for every engagement.</li>
-            <li><strong>What's the minimum commitment?</strong> None — On Demand plans are month-to-month.</li>
-          </ul>
+          <details class="contact-faq-item">
+            <summary>How quickly do you reply?</summary>
+            <p>Within 1 business day — usually the same day. WhatsApp replies typically within 2 hours during business hours (9am–7pm WIB).</p>
+          </details>
+          <details class="contact-faq-item">
+            <summary>Do you sign NDAs?</summary>
+            <p>Yes, before kickoff for every engagement. Standard mutual NDA or your template — whichever you prefer.</p>
+          </details>
+          <details class="contact-faq-item">
+            <summary>What's the minimum commitment?</summary>
+            <p>None. On Demand plans are month-to-month. Cancel any time with 30 days notice, no questions asked.</p>
+          </details>
         </div>
       </aside>
     </div>
@@ -172,22 +190,25 @@ get_header();
 .form-field { display: flex; flex-direction: column; gap: 8px; }
 .form-field label { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--ink); }
 .form-field input, .form-field select, .form-field textarea {
-  width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px;
+  width: 100%; padding: 13px 15px; border: 1.5px solid var(--line-strong); border-radius: 10px;
   font-family: var(--sans); font-size: 15px; color: var(--ink); background: #fff;
   transition: border-color .2s ease, box-shadow .2s ease;
 }
+.form-field input:hover, .form-field select:hover, .form-field textarea:hover { border-color: rgba(42,98,99,.35); }
 .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
   outline: none; border-color: var(--teal); box-shadow: 0 0 0 4px rgba(42,98,99,.10);
 }
 .form-field--check label { display: flex; align-items: flex-start; gap: 10px; font-weight: 400; font-size: 14px; color: var(--ink-soft); }
 .form-field--check input { width: auto; margin-top: 3px; }
+.vai-form .btn { align-self: flex-start; margin-top: 4px; }
 .vai-form-status { font-size: 14px; min-height: 22px; padding: 12px 16px; border-radius: 10px; line-height: 1.45; }
 .vai-form-status:empty { display: none; }
 .vai-form-status.is-ok { color: var(--teal); background: rgba(42,98,99,.10); border: 1px solid rgba(42,98,99,.25); }
 .vai-form-status.is-err { color: #b54545; background: rgba(181,69,69,.08); border: 1px solid rgba(181,69,69,.25); }
 
 .contact-aside { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 100px; }
-.contact-card { display: flex; gap: 14px; padding: 18px 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+.contact-card { display: flex; gap: 14px; padding: 18px 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; transition: border-color .2s ease, transform .2s ease; }
+.contact-card:hover { border-color: var(--teal); transform: translateY(-1px); }
 .contact-card-icon { width: 42px; height: 42px; border-radius: 10px; background: var(--cream); color: var(--teal); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .contact-card-label { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; }
 .contact-card-value { font-family: var(--sans); font-size: 15px; color: var(--navy); font-weight: 600; line-height: 1.4; display: block; }
@@ -197,10 +218,21 @@ a.contact-card-value:hover { color: var(--teal); }
 .contact-social-row { display: flex; gap: 10px; }
 .contact-social-row a { width: 38px; height: 38px; border-radius: 10px; background: var(--cream); color: var(--navy); display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s; }
 .contact-social-row a:hover { background: var(--navy); color: var(--cream); }
+
+/* Quick answers (collapsible) */
 .contact-faq { margin-top: 6px; padding: 20px 22px; background: var(--cream); border-radius: 14px; }
-.contact-faq ul { margin-top: 14px; display: flex; flex-direction: column; gap: 10px; }
-.contact-faq li { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
-.contact-faq strong { color: var(--navy); }
+.contact-faq .eyebrow { display: block; margin-bottom: 14px; }
+.contact-faq-item { border-top: 1px solid var(--line); padding: 14px 0; }
+.contact-faq-item:first-of-type { border-top: 0; padding-top: 0; }
+.contact-faq-item summary {
+  font-family: var(--sans); font-size: 14px; font-weight: 600;
+  color: var(--navy); cursor: pointer; list-style: none;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+}
+.contact-faq-item summary::-webkit-details-marker { display: none; }
+.contact-faq-item summary::after { content: '+'; font-size: 20px; color: var(--teal); font-weight: 400; line-height: 1; transition: transform .2s ease; }
+.contact-faq-item[open] summary::after { content: '−'; }
+.contact-faq-item p { margin-top: 8px; font-size: 13.5px; color: var(--ink-soft); line-height: 1.6; }
 
 @media (max-width: 920px) {
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
