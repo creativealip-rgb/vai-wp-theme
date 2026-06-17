@@ -150,7 +150,7 @@ get_header();
       $alt = array('Outsource Accelerator','GoodFirms','DesignRush','BestStartup Asia','PR Expert','Business World','ASEAN','Asia Magazine','Clutch','TopVA');
       for ($i=0; $i<count($featured); $i++):
       ?>
-      <img src="<?php echo vai_asset('media-logos/'.$featured[$i]); ?>" alt="<?php echo $alt[$i]; ?>" loading="lazy">
+      <img src="<?php echo vai_asset('media-logos/'.$featured[$i]); ?>" alt="<?php echo $alt[$i]; ?>" loading="lazy" width="140" height="36" decoding="async">
       <?php endfor; ?>
     </div>
   </div>
@@ -159,8 +159,7 @@ get_header();
 <!-- PRESS COVERAGE -->
 <section class="section">
   <div class="container">
-    <div class="svc-detail-head" style="margin-bottom:40px;">
-      <span class="svc-detail-num">01</span>
+    <div class="svc-detail-head" data-num="01" style="margin-bottom:40px;">
       <span class="svc-detail-tag" style="margin:0;">Press coverage</span>
       <h2>In the <em>media</em>.</h2>
       <p>Articles, features, and industry recognition for our named-personal approach to virtual assistance.</p>
@@ -195,7 +194,7 @@ get_header();
       ?>
       <a class="press-card" href="<?php echo $p[3]; ?>" target="_blank" rel="noopener">
         <div class="press-card-img">
-          <img src="<?php echo vai_asset('media-logos/'.$p[0]); ?>" alt="<?php echo $p[1]; ?>" loading="lazy">
+          <img src="<?php echo vai_asset('media-logos/'.$p[0]); ?>" alt="<?php echo $p[1]; ?>" loading="lazy" width="180" height="80" decoding="async">
         </div>
         <div class="press-card-body">
           <div class="press-card-outlet"><?php echo $p[1]; ?></div>
@@ -214,8 +213,7 @@ get_header();
 <!-- RECOGNITION -->
 <section class="section section--cream">
   <div class="container">
-    <div class="svc-detail-head" style="margin-bottom:40px;">
-      <span class="svc-detail-num">02</span>
+    <div class="svc-detail-head" data-num="02" style="margin-bottom:40px;">
       <span class="svc-detail-tag" style="margin:0;">Recognition</span>
       <h2>A track record of <em>named-personal</em> service.</h2>
       <p>Twelve years of measurable results across continents, industries, and engagement sizes.</p>

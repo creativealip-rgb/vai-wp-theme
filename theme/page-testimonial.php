@@ -128,7 +128,7 @@ $total_countries = count(array_unique(array_merge(
     <div class="testi-region">
       <div class="testi-region-head">
         <div class="testi-region-bar" aria-hidden="true"></div>
-        <h3 class="testi-region-title"><?php echo esc_html($region); ?></h3>
+        <h2 class="testi-region-title"><?php echo esc_html($region); ?></h2>
         <div class="testi-region-flags">
           <?php foreach ($region_cc as $cc):
             list($flag, $name) = vai_flag($cc);

@@ -297,7 +297,7 @@ get_header();
       <p>On Demand for small tasks. Dedicated for ongoing operations. Need more? Let's talk.</p>
     </div>
     <div class="billing-toggle-wrap">
-      <div class="billing-toggle" role="tablist" aria-label="Billing period">
+      <div class="billing-toggle" aria-label="Billing period">
         <button class="is-active" data-billing="monthly">Monthly</button>
         <button data-billing="annual">Annual <span class="billing-save">save 20%</span></button>
       </div>

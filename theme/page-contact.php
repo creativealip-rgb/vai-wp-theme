@@ -26,8 +26,7 @@ get_header();
     <div class="contact-grid">
       <!-- LEFT: form -->
       <div class="contact-form-wrap">
-        <div class="svc-detail-head" style="text-align:left; margin-bottom:32px; max-width:none;">
-          <span class="svc-detail-num" style="left:-8px; top:-12px;">01</span>
+        <div class="svc-detail-head" data-num="01" style="text-align:left; margin-bottom:32px; max-width:none;">
           <span class="svc-detail-tag" style="margin:0;">Inquiry form</span>
           <h2 style="margin:8px 0 12px;">Send us a <em>message</em>.</h2>
           <p style="color:var(--ink-soft);">We reply within 1 business day — usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.</p>

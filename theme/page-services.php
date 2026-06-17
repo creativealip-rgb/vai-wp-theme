@@ -65,8 +65,7 @@ foreach ($vai_service_groups as $cat => $g):
 ?>
 <section class="section section--alt fade-up svc-cat-section" id="<?php echo esc_attr($g['id']); ?>">
   <div class="container">
-    <div class="svc-detail-head">
-      <span class="svc-detail-num"><?php echo sprintf('%02d', $cat_index); ?></span>
+    <div class="svc-detail-head" data-num="<?php echo sprintf('%02d', $cat_index); ?>">
       <span class="svc-detail-tag"><?php echo esc_html($g['tag']); ?></span>
       <h2><?php echo esc_html($cat); ?> <em>services</em></h2>
       <p><?php echo $g['desc']; ?></p>

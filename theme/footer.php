@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
+        <h3>Services</h3>
         <ul>
           <li><a href="<?php echo vai_hash_link('#services'); ?>">Personal Assistant</a></li>
           <li><a href="<?php echo vai_hash_link('#services'); ?>">Executive Admin</a></li>
@@ -30,7 +30,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h3>Company</h3>
         <ul>
           <li><a href="<?php echo vai_hash_link('#about'); ?>">About</a></li>
           <li><a href="<?php echo vai_hash_link('#testimonials'); ?>">Testimonials</a></li>
@@ -40,7 +40,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Connect</h4>
+        <h3>Connect</h3>
         <ul>
           <li><a href="https://www.facebook.com/virtualassistant.id" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="https://www.instagram.com/virtualassistant_id/" target="_blank" rel="noopener">Instagram</a></li>

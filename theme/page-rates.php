@@ -3,25 +3,35 @@
 get_header();
 ?>
 
-<section class="hero" style="min-height:30vh; padding:80px 0 40px;">
+<section class="hero" style="min-height:36vh; padding:80px 0 50px;">
   <div class="container" style="text-align:center;">
     <span class="hero-eyebrow">Rates &amp; packages</span>
     <h1>Pick the plan that<br>fits your <em>workload</em>.</h1>
     <p class="hero-sub" style="max-width:640px; margin:18px auto 0;">
       On Demand for small tasks and ad-hoc work. Dedicated for ongoing operations. Need more? Let's talk.
     </p>
+    <div class="svc-hero-stats" style="margin-top:40px;">
+      <div class="svc-hero-stat"><b>6</b><span>plans</span></div>
+      <div class="svc-hero-stat"><b>2</b><span>categories</span></div>
+      <div class="svc-hero-stat"><b>20%</b><span>save annual</span></div>
+      <div class="svc-hero-stat"><b>30d</b><span>cancel anytime</span></div>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container" style="text-align:center;">
+    <div class="svc-detail-head" data-num="01" style="margin-bottom:32px;">
+      <span class="svc-detail-tag" style="margin:0;">Compare plans</span>
+      <h2>Choose what <em>fits</em>.</h2>
+    </div>
     <div class="billing-toggle-wrap">
-      <div class="billing-toggle" role="tablist" aria-label="Billing period">
+      <div class="billing-toggle" aria-label="Billing period">
         <button class="is-active" data-billing="monthly">Monthly</button>
         <button data-billing="annual">Annual <span class="billing-save">save 20%</span></button>
       </div>
     </div>
-    <div class="pricing-toggle">
+    <div class="pricing-toggle" aria-label="Plan type">
       <button class="is-active" data-plan="ondemand">On Demand</button>
       <button data-plan="dedicated">Dedicated</button>
     </div>
