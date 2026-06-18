@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://wa.me">
-<meta name="theme-color" content="#0B2535">
+<meta name="theme-color" content="#FFF7ED">
 <?php wp_head(); ?>
 <meta name="description" content="Virtual Assistant Indonesia — leading VA service since 2011. Personal, executive, and operational support for entrepreneurs, expatriates, and businesses worldwide.">
 <link rel="icon" type="image/png" sizes="512x512" href="<?php echo vai_asset('photos/logo-vai-icon.png'); ?>">

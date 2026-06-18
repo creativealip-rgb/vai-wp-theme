@@ -56,15 +56,28 @@
     });
   }
 
-  // Scroll fade-in
+  // Scroll fade-in — observe + immediately reveal anything already in viewport on load
   var els = document.querySelectorAll('.fade-up');
   if ('IntersectionObserver' in window) {
     var obs = new IntersectionObserver(function(es) {
       es.forEach(function(e) {
-        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
     els.forEach(function(el) { obs.observe(el); });
+    // Belt-and-suspenders: after first paint, reveal anything within 2x viewport (handles initial render + cached pages)
+    requestAnimationFrame(function() {
+      els.forEach(function(el) {
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight * 2 && r.bottom > 0) {
+          el.classList.add('is-visible');
+          obs.unobserve(el);
+        }
+      });
+    });
+  } else {
+    // No IO support — reveal everything immediately
+    els.forEach(function(el) { el.classList.add('is-visible'); });
   }
 
   // Back to top

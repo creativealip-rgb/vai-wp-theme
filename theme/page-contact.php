@@ -9,7 +9,7 @@ get_header();
     <span class="hero-eyebrow">Get in touch</span>
     <h1>Let's build something<br><em>together</em>.</h1>
     <p class="hero-sub" style="max-width:640px; margin:18px auto 0;">
-      Free consultation. We'll review your workload, recommend the right plan, and answer everything you need to know — no strings attached.
+      Free consultation. We'll review your workload, recommend the right plan, and answer everything you need to know, no strings attached.
     </p>
     <div class="svc-hero-stats" style="margin-top:40px;">
       <div class="svc-hero-stat"><b>&lt; 2h</b><span>avg reply</span></div>
@@ -29,7 +29,7 @@ get_header();
         <div class="svc-detail-head" data-num="01" style="text-align:left; margin-bottom:32px; max-width:none;">
           <span class="svc-detail-tag" style="margin:0;">Inquiry form</span>
           <h2 style="margin:8px 0 12px;">Send us a <em>message</em>.</h2>
-          <p style="color:var(--ink-soft);">We reply within 1 business day — usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.</p>
+          <p style="color:var(--ink-soft);">We reply within 1 business day, usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.</p>
         </div>
 
         <form id="vaiContactForm" class="vai-form" novalidate aria-label="Contact form">
@@ -155,11 +155,11 @@ get_header();
           <span class="eyebrow">Quick answers</span>
           <details class="contact-faq-item">
             <summary>How quickly do you reply?</summary>
-            <p>Within 1 business day — usually the same day. WhatsApp replies typically within 2 hours during business hours (9am–7pm WIB).</p>
+            <p>Within 1 business day, usually the same day. WhatsApp replies typically within 2 hours during business hours (9am–7pm WIB).</p>
           </details>
           <details class="contact-faq-item">
             <summary>Do you sign NDAs?</summary>
-            <p>Yes, before kickoff for every engagement. Standard mutual NDA or your template — whichever you prefer.</p>
+            <p>Yes, before kickoff for every engagement. Standard mutual NDA or your template, whichever you prefer.</p>
           </details>
           <details class="contact-faq-item">
             <summary>What's the minimum commitment?</summary>

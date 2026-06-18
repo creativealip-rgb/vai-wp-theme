@@ -137,7 +137,7 @@ get_header();
       <?php
       $includes = array(
         array('NDA before kickoff','Yes, signed before any work begins.'),
-        array('Named personal service','You work with the same person — not a rotating pool.'),
+        array('Named personal service','You work with the same person, not a rotating pool.'),
         array('Reply window','Configurable per plan; default 1 business day.'),
         array('Weekly status report','Included on Executive and above.'),
         array('Tooling stack','Google Workspace, Slack, WhatsApp, Zoom, project tools.'),
@@ -163,7 +163,7 @@ get_header();
     <div class="rates-faq">
       <details class="rates-faq-item">
         <summary>Are these IDR prices fixed?</summary>
-        <p>Yes, all listed rates are in Indonesian Rupiah. For overseas clients we can invoice in USD/SGD — talk to us about the conversion on your engagement.</p>
+        <p>Yes, all listed rates are in Indonesian Rupiah. For overseas clients we can invoice in USD/SGD, talk to us about the conversion on your engagement.</p>
       </details>
       <details class="rates-faq-item">
         <summary>What if I exceed my hours?</summary>
@@ -192,7 +192,7 @@ get_header();
 <section class="cta-band">
   <div class="container">
     <h2>Not sure which <em>plan</em> fits?</h2>
-    <p style="margin:18px auto 32px;">Book a free 30-minute consultation. We'll review your workload and recommend the right plan — no pressure.</p>
+    <p style="margin:18px auto 32px;">Book a free 30-minute consultation. We'll review your workload and recommend the right plan, no pressure.</p>
     <a href="https://form.jotform.com/202773574256057" target="_blank" rel="noopener" class="btn btn--cream btn--lg">Request Free Consultation
       <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>

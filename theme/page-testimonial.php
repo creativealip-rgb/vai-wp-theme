@@ -33,7 +33,7 @@ function vai_flag($cc) {
 }
 
 // Featured testimonial — pick James LC (long, strong, multinational)
-$featured = array('James LC','Businessman','DEU','Of all the VAs I have, Mimi is the best one. She is thoughtful, timely, kind, reliable and resourceful. I don\'t need to explain too many details — she already understands everything! Outstanding! I wish there were more Mimis in every country.');
+$featured = array('James LC','Businessman','DEU','Of all the VAs I have, Mimi is the best one. She is thoughtful, timely, kind, reliable and resourceful. I don\'t need to explain too many details. She already understands everything! Outstanding! I wish there were more Mimis in every country.');
 
 $regions = array(
   'Americas' => array(
@@ -109,8 +109,7 @@ $total_countries = count(array_unique(array_merge(
             <div class="testi-role"><?php echo esc_html($featured[1]); ?></div>
           </div>
           <div class="testi-flag testi-flag--lg">
-            <span class="testi-flag-emoji"><?php echo $feat_flag; ?></span>
-            <span class="testi-cc"><?php echo esc_html($feat_cc); ?></span>
+            <span class="testi-cc"><?php echo esc_html($featured[2]); ?></span>
           </div>
         </div>
       </div>
@@ -154,8 +153,7 @@ $total_countries = count(array_unique(array_merge(
               <div class="testi-role"><?php echo esc_html($t[1]); ?></div>
             </div>
             <div class="testi-flag">
-              <span class="testi-flag-emoji"><?php echo $flag; ?></span>
-              <span class="testi-cc"><?php echo esc_html($cc_name); ?></span>
+              <span class="testi-cc"><?php echo esc_html($t[2]); ?></span>
             </div>
           </div>
         </div>

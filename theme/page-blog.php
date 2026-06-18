@@ -230,7 +230,7 @@ get_header();
 <section class="cta-band">
   <div class="container">
     <h2>Want to be the <em>next success story</em>?</h2>
-    <p style="margin:18px auto 32px;">Book a free consultation. We'll review your workload and recommend the right plan — no pressure.</p>
+    <p style="margin:18px auto 32px;">Book a free consultation. We'll review your workload and recommend the right plan, no pressure.</p>
     <a href="https://form.jotform.com/202773574256057" target="_blank" rel="noopener" class="btn btn--cream btn--lg">Request Free Consultation
       <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>

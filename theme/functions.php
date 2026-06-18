@@ -19,17 +19,37 @@ function vai_theme_setup() {
 add_action('after_setup_theme', 'vai_theme_setup');
 
 function vai_enqueue_assets() {
-    wp_enqueue_style('vai-google-fonts', 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@400;500;600;700&display=swap', array(), null);
-    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '1.0');
-    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '1.0', true);
+    // ClickUp display fonts + Cormorant Garamond for editorial italic accents (boutique warmth)
+    wp_enqueue_style('vai-google-fonts', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;650;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap', array(), null);
+    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '4.5');
+    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '4.5', true);
     if (is_page('contact-us')) {
-        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '1.0', true);
+        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '4.5', true);
         wp_localize_script('vai-contact', 'VAI_CONTACT', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('vai_contact'),
         ));
     }
 }
+
+// Force theme assets to load relative-to-host. WP enqueue uses home_url()
+// which points to the live domain (vai.168-144-37-19.sslip.io) but the page
+// may be served from localhost:8091 in dev — without this filter the browser
+// blocks the cross-origin script load (mixed content + CORS).
+function vai_force_relative_asset_url($src) {
+    if (empty($src)) return $src;
+    if (strpos($src, '/wp-content/themes/vai-theme/') === false) return $src;
+    $req_host = isset($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : '';
+    $url_host = parse_url($src, PHP_URL_HOST);
+    if ($req_host && $url_host && strtolower($url_host) !== $req_host) {
+        $path  = parse_url($src, PHP_URL_PATH);
+        $query = parse_url($src, PHP_URL_QUERY);
+        return $path . ($query ? '?' . $query : '');
+    }
+    return $src;
+}
+add_filter('style_loader_src',  'vai_force_relative_asset_url', 999);
+add_filter('script_loader_src', 'vai_force_relative_asset_url', 999);
 add_action('wp_enqueue_scripts', 'vai_enqueue_assets');
 
 // On theme activation, create homepage page if not exists
@@ -50,9 +70,24 @@ function vai_activate() {
 }
 add_action('after_switch_theme', 'vai_activate');
 
+// Helper: theme asset URL — strip host when accessed via different origin (local dev)
+// so CSS/JS load from the same origin the page is served on.
+function vai_relative_uri($url) {
+    if (empty($url)) return $url;
+    $req_host = isset($_SERVER['HTTP_HOST']) ? preg_replace('/:\d+$/', '', strtolower($_SERVER['HTTP_HOST'])) : '';
+    $url_host = parse_url($url, PHP_URL_HOST);
+    $url_host_norm = $url_host ? preg_replace('/:\d+$/', '', strtolower($url_host)) : '';
+    if ($req_host && $url_host_norm && $req_host !== $url_host_norm) {
+        $path = parse_url($url, PHP_URL_PATH);
+        $query = parse_url($url, PHP_URL_QUERY);
+        return $path . ($query ? '?' . $query : '');
+    }
+    return $url;
+}
+
 // Helper: theme asset URL
 function vai_asset($path) {
-    return esc_url(get_theme_file_uri('assets/' . $path));
+    return esc_url(vai_relative_uri(get_theme_file_uri('assets/' . $path)));
 }
 
 // Helper: resolve in-page hash links. On home, use bare hash; on other pages, route to home + hash.

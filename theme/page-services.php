@@ -11,8 +11,8 @@ $vai_service_groups = array(
     'tag'   => 'For busy individuals',
     'desc'  => 'Lifestyle and personal support so your time and headspace go where they matter most.',
     'items' => array(
-      array('icon-personal-assistant.gif','Personal Assistant','Daily tasks, lifestyle simplification — your right hand for everything non-strategic.', true),
-      array('icon-travel.gif','Travel Management','Trip planning, hotels, rentals, and full itineraries — domestic and international.', false),
+      array('icon-personal-assistant.gif','Personal Assistant','Daily tasks, lifestyle simplification. Your right hand for everything non-strategic.', true),
+      array('icon-travel.gif','Travel Management','Trip planning, hotels, rentals, and full itineraries. Domestic and international.', false),
     ),
   ),
   'Executive' => array(
@@ -21,7 +21,7 @@ $vai_service_groups = array(
     'desc'  => 'Secretarial, research, and operational support that keeps leadership organized and on brand.',
     'items' => array(
       array('icon-executive-admin.gif','Executive Administration','Secretarial and admin support that keeps your company organized, on time, and on brand.', true),
-      array('icon-research.gif','Research &amp; Data Entry','Collect, analyze, and report — accurate research and clean data, on schedule.', false),
+      array('icon-research.gif','Research &amp; Data Entry','Collect, analyze, and report. Accurate research and clean data, on schedule.', false),
       array('icon-legal.gif','Legal Consultant','Document review, legal research, and government regulation guidance at fair rates.', false),
     ),
   ),
@@ -32,7 +32,7 @@ $vai_service_groups = array(
     'items' => array(
       array('icon-marketing.gif','Marketing &amp; Advertising','Strategies and campaigns to maximize your reach, sales, and brand visibility.', true),
       array('icon-social-media.gif','Social Media Management','Plan, implement, and monitor your social strategy with measurable awareness focus.', false),
-      array('icon-event-planner.gif','Event Planner','Prep, oversee, and facilitate all event aspects — corporate or private occasions.', false),
+      array('icon-event-planner.gif','Event Planner','Prep, oversee, and facilitate all event aspects. Corporate or private occasions.', false),
       array('icon-customise.gif','Project Support','Customised duties tailored to your scope: project control, monitoring, office management.', false),
     ),
   ),
@@ -45,7 +45,7 @@ $vai_service_groups = array(
     <div class="section-head">
       <span class="eyebrow">All Services</span>
       <h1>What our VAs <em>actually do</em>.</h1>
-      <p>Nine services across three categories. Pick what fits — or mix and match for a custom scope.</p>
+      <p>Nine services across three categories. Pick what fits, or mix and match for a custom scope.</p>
     </div>
     <div class="svc-hero-stats">
       <div class="svc-hero-stat"><b>9</b><span>services</span></div>
@@ -92,7 +92,7 @@ foreach ($vai_service_groups as $cat => $g):
   <div class="container">
     <div class="section-head">
       <h2>Not sure which fits? <em>We'll scope it with you.</em></h2>
-      <p>Tell us your workload and goals in a free consultation. We'll recommend the right mix — and you only pay for the hours you need.</p>
+      <p>Tell us your workload and goals in a free consultation. We'll recommend the right mix, and you only pay for the hours you need.</p>
       <div class="section-foot">
         <a class="btn btn--primary" href="<?php echo esc_url(home_url('/#contact')); ?>">Book a free consultation</a>
         <a class="btn btn--ghost-dark" href="<?php echo esc_url(home_url('/pricing/')); ?>">See rates</a>
