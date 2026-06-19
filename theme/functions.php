@@ -21,10 +21,10 @@ add_action('after_setup_theme', 'vai_theme_setup');
 function vai_enqueue_assets() {
     // ClickUp display fonts + Cormorant Garamond for editorial italic accents (boutique warmth)
     wp_enqueue_style('vai-google-fonts', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;650;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap', array(), null);
-    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '4.5');
-    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '4.5', true);
+    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '5.0');
+    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '5.0', true);
     if (is_page('contact-us')) {
-        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '4.5', true);
+        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '5.0', true);
         wp_localize_script('vai-contact', 'VAI_CONTACT', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('vai_contact'),
@@ -51,6 +51,50 @@ function vai_force_relative_asset_url($src) {
 add_filter('style_loader_src',  'vai_force_relative_asset_url', 999);
 add_filter('script_loader_src', 'vai_force_relative_asset_url', 999);
 add_action('wp_enqueue_scripts', 'vai_enqueue_assets');
+
+// ACF: setup, field groups, helpers
+require_once get_stylesheet_directory() . '/inc/acf-setup.php';
+
+// Helper: get ACF field with fallback. Returns $default if field empty/missing.
+// Use in templates: echo vai_f('home_hero_title', 'Your trusted assistant.');
+if ( ! function_exists( 'vai_f' ) ) {
+    function vai_f( $name, $default = '' ) {
+        if ( ! function_exists( 'get_field' ) ) return $default;
+        $v = get_field( $name );
+        if ( $v === false || $v === null || $v === '' ) return $default;
+        return $v;
+    }
+}
+
+// Helper: build a 3-part title (pre + <em>italic</em> + post) from ACF fields.
+// Usage: echo vai_title('home_hero', ['Your trusted', 'assistant', 'in the next room.']);
+if ( ! function_exists( 'vai_title' ) ) {
+    function vai_title( $prefix, $defaults = ['', '', ''] ) {
+        $pre  = vai_f( $prefix . '_pre',  $defaults[0] ?? '' );
+        $em   = vai_f( $prefix . '_em',   $defaults[1] ?? '' );
+        $post = vai_f( $prefix . '_post', $defaults[2] ?? '' );
+        $out  = trim( $pre );
+        if ( $em !== '' )   $out .= ' <em>' . esc_html( $em ) . '</em>';
+        if ( $post !== '' ) $out .= ' ' . trim( $post );
+        // Allow safe inline HTML in pre/post (e.g. <br>) so users can shape the layout.
+        return wp_kses_post( $out );
+    }
+}
+
+// Helper: render an array field as <li> items, one per line. Returns li elements (no <ul>).
+if ( ! function_exists( 'vai_list' ) ) {
+    function vai_list( $value, $default = '' ) {
+        $raw = ( $value === '' || $value === null ) ? $default : $value;
+        $lines = preg_split( "/\r\n|\r|\n/", trim( (string) $raw ) );
+        $out = '';
+        foreach ( $lines as $l ) {
+            $l = trim( $l );
+            if ( $l === '' ) continue;
+            $out .= '<li>' . wp_kses_post( $l ) . '</li>';
+        }
+        return $out;
+    }
+}
 
 // On theme activation, create homepage page if not exists
 function vai_activate() {

@@ -1,6 +1,27 @@
 <?php
 /* Template Name: VAI Achievement / Press */
 get_header();
+
+/* ACF reads with fallbacks */
+$blog_hero_eyebrow = vai_f('blog_hero_eyebrow', 'Achievement & Press');
+$blog_hero_pre  = vai_f('blog_hero_title_pre', 'Featured in');
+$blog_hero_em   = vai_f('blog_hero_em', 'outlets');
+$blog_hero_post = vai_f('blog_hero_title_post', '<br>across Indonesia and beyond.');
+$blog_hero_sub  = vai_f('blog_hero_sub', 'Twelve years of named-personal service, recognized by regional and global media, business directories, and industry awards.');
+
+$blog_hero_stats = [
+  ['b' => vai_f('blog_hero_stat_1_num', '22'),  'lbl' => vai_f('blog_hero_stat_1_lbl', 'articles')],
+  ['b' => vai_f('blog_hero_stat_2_num', '12+'), 'lbl' => vai_f('blog_hero_stat_2_lbl', 'outlets')],
+  ['b' => vai_f('blog_hero_stat_3_num', '6'),   'lbl' => vai_f('blog_hero_stat_3_lbl', 'industries')],
+  ['b' => vai_f('blog_hero_stat_4_num', '14+'), 'lbl' => vai_f('blog_hero_stat_4_lbl', 'years')],
+];
+
+$blog_cta_title_pre  = vai_f('blog_cta_title_pre', 'Want to be the');
+$blog_cta_em         = vai_f('blog_cta_em', 'next success story');
+$blog_cta_post       = vai_f('blog_cta_title_post', '?');
+$blog_cta_sub        = vai_f('blog_cta_sub', 'Book a free consultation. We\'ll review your workload and recommend the right plan, no pressure.');
+$blog_cta_button     = vai_f('blog_cta_button', 'Request Free Consultation');
+$blog_cta_url        = vai_f('blog_cta_url', 'https://form.jotform.com/202773574256057');
 ?>
 <style>
 /* Achievement page — local styles */
@@ -125,16 +146,15 @@ get_header();
 <!-- HERO -->
 <section class="hero" style="min-height:36vh; padding:80px 0 50px;">
   <div class="container" style="text-align:center;">
-    <span class="hero-eyebrow">Achievement &amp; Press</span>
-    <h1>Featured in <em>12+ outlets</em><br>across Indonesia and beyond.</h1>
+    <span class="hero-eyebrow"><?php echo esc_html($blog_hero_eyebrow); ?></span>
+    <h1><?php echo esc_html($blog_hero_pre); ?> <em><?php echo esc_html($blog_hero_em); ?></em><?php echo wp_kses_post($blog_hero_post); ?></h1>
     <p class="hero-sub" style="max-width:680px; margin:18px auto 0;">
-      Twelve years of named-personal service, recognized by regional and global media, business directories, and industry awards.
+      <?php echo esc_html($blog_hero_sub); ?>
     </p>
     <div class="svc-hero-stats" style="margin-top:40px;">
-      <div class="svc-hero-stat"><b>22</b><span>articles</span></div>
-      <div class="svc-hero-stat"><b>12+</b><span>outlets</span></div>
-      <div class="svc-hero-stat"><b>6</b><span>industries</span></div>
-      <div class="svc-hero-stat"><b>14+</b><span>years</span></div>
+      <?php foreach ( $blog_hero_stats as $s ) : ?>
+      <div class="svc-hero-stat"><b><?php echo esc_html($s['b']); ?></b><span><?php echo esc_html($s['lbl']); ?></span></div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -229,9 +249,9 @@ get_header();
 
 <section class="cta-band">
   <div class="container">
-    <h2>Want to be the <em>next success story</em>?</h2>
-    <p style="margin:18px auto 32px;">Book a free consultation. We'll review your workload and recommend the right plan, no pressure.</p>
-    <a href="https://form.jotform.com/202773574256057" target="_blank" rel="noopener" class="btn btn--cream btn--lg">Request Free Consultation
+    <h2><?php echo esc_html($blog_cta_title_pre); ?> <em><?php echo esc_html($blog_cta_em); ?></em><?php echo esc_html($blog_cta_post); ?></h2>
+    <p style="margin:18px auto 32px;"><?php echo esc_html($blog_cta_sub); ?></p>
+    <a href="<?php echo esc_url($blog_cta_url); ?>" target="_blank" rel="noopener" class="btn btn--cream btn--lg"><?php echo esc_html($blog_cta_button); ?>
       <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>

@@ -1,21 +1,68 @@
 <?php
 /* Template Name: VAI Contact */
 get_header();
+
+/* ACF reads with fallbacks */
+$contact_hero_eyebrow = vai_f('contact_hero_eyebrow', 'Get in touch');
+$contact_hero_pre = vai_f('contact_hero_title_pre', "Let's build something<br>");
+$contact_hero_em  = vai_f('contact_hero_em', 'together');
+$contact_hero_post = vai_f('contact_hero_title_post', '.');
+$contact_hero_sub = vai_f('contact_hero_sub', "Free consultation. We'll review your workload, recommend the right plan, and answer everything you need to know, no strings attached.");
+
+$contact_hero_stats = [
+  ['b' => vai_f('contact_hero_stat_1_num', '< 2h'), 'lbl' => vai_f('contact_hero_stat_1_lbl', 'avg reply')],
+  ['b' => vai_f('contact_hero_stat_2_num', '4'),     'lbl' => vai_f('contact_hero_stat_2_lbl', 'channels')],
+  ['b' => vai_f('contact_hero_stat_3_num', '14+'),   'lbl' => vai_f('contact_hero_stat_3_lbl', 'years')],
+  ['b' => vai_f('contact_hero_stat_4_num', '99%'),   'lbl' => vai_f('contact_hero_stat_4_lbl', 'satisfaction')],
+];
+
+$contact_form_intro = vai_f('contact_form_intro', "We reply within 1 business day, usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.");
+$contact_form_submit = vai_f('contact_form_submit', 'Send Inquiry');
+
+$contact_email   = vai_f('contact_email', 'hello@virtualassistant.id');
+$contact_phone   = vai_f('contact_phone', '+62 812 3456 7890');
+$contact_wa      = vai_f('contact_whatsapp', '6281234567890');
+$contact_address = vai_f('contact_address', "Jl. Tanah Kusir 2, Arteri Pondok Indah\nJakarta Selatan, Indonesia");
+$contact_hours   = vai_f('contact_hours', '9am–7pm WIB');
+
+$contact_faq = [];
+for ( $i = 1; $i <= 3; $i++ ) {
+  $contact_faq[] = [
+    'q' => vai_f('contact_faq_'.$i.'_faq_q', ''),
+    'a' => vai_f('contact_faq_'.$i.'_faq_a', ''),
+  ];
+}
+
+$contact_faq_defaults = [
+  ['How quickly do you reply?','Within 1 business day, usually the same day. WhatsApp replies typically within 2 hours during business hours (9am–7pm WIB).'],
+  ['Do you sign NDAs?','Yes, before kickoff for every engagement. Standard mutual NDA or your template, whichever you prefer.'],
+  ["What's the minimum commitment?",'None. On Demand plans are month-to-month. Cancel any time with 30 days notice, no questions asked.'],
+];
+
+$contact_cta_pre  = vai_f('contact_cta_title_pre', 'Prefer to');
+$contact_cta_em   = vai_f('contact_cta_em', 'book a call');
+$contact_cta_post = vai_f('contact_cta_title_post', '?');
+$contact_cta_sub  = vai_f('contact_cta_sub', 'Pick a time directly via our scheduling form. 30 minutes, free, no obligation.');
+$contact_cta_button = vai_f('contact_cta_button', 'Book a Free Consultation');
+$contact_cta_url  = vai_f('contact_cta_url', 'https://form.jotform.com/202773574256057');
+
+$wa_url = 'https://wa.me/' . preg_replace('/[^0-9]/', '', $contact_wa);
+$email_link = 'mailto:' . $contact_email;
+$address_lines = preg_split("/\r\n|\r|\n/", $contact_address);
 ?>
 
 <!-- HERO -->
 <section class="hero" style="min-height:36vh; padding:80px 0 50px;">
   <div class="container" style="text-align:center;">
-    <span class="hero-eyebrow">Get in touch</span>
-    <h1>Let's build something<br><em>together</em>.</h1>
+    <span class="hero-eyebrow"><?php echo esc_html($contact_hero_eyebrow); ?></span>
+    <h1><?php echo wp_kses_post($contact_hero_pre); ?><em><?php echo esc_html($contact_hero_em); ?></em><?php echo esc_html($contact_hero_post); ?></h1>
     <p class="hero-sub" style="max-width:640px; margin:18px auto 0;">
-      Free consultation. We'll review your workload, recommend the right plan, and answer everything you need to know, no strings attached.
+      <?php echo esc_html($contact_hero_sub); ?>
     </p>
     <div class="svc-hero-stats" style="margin-top:40px;">
-      <div class="svc-hero-stat"><b>&lt; 2h</b><span>avg reply</span></div>
-      <div class="svc-hero-stat"><b>4</b><span>channels</span></div>
-      <div class="svc-hero-stat"><b>14+</b><span>years</span></div>
-      <div class="svc-hero-stat"><b>99%</b><span>satisfaction</span></div>
+      <?php foreach ( $contact_hero_stats as $s ) : ?>
+      <div class="svc-hero-stat"><b><?php echo esc_html($s['b']); ?></b><span><?php echo esc_html($s['lbl']); ?></span></div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -29,7 +76,7 @@ get_header();
         <div class="svc-detail-head" data-num="01" style="text-align:left; margin-bottom:32px; max-width:none;">
           <span class="svc-detail-tag" style="margin:0;">Inquiry form</span>
           <h2 style="margin:8px 0 12px;">Send us a <em>message</em>.</h2>
-          <p style="color:var(--ink-soft);">We reply within 1 business day, usually faster. No spam, no sales pressure, just a real conversation about whether we're the right fit.</p>
+          <p style="color:var(--ink-soft);"><?php echo esc_html($contact_form_intro); ?></p>
         </div>
 
         <form id="vaiContactForm" class="vai-form" novalidate aria-label="Contact form">
@@ -79,13 +126,12 @@ get_header();
               <span>I agree to be contacted by VAI about my inquiry.</span>
             </label>
           </div>
-          <!-- Honeypot — hidden from humans and screen readers, bots will fill it -->
           <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
             <label for="vaiWebsite" aria-label="Website (do not fill)">Website</label>
             <input type="text" id="vaiWebsite" name="vai_website" tabindex="-1" autocomplete="off" value="">
           </div>
           <button type="submit" class="btn btn--primary btn--lg" id="vaiSubmitBtn">
-            <span class="vai-submit-label">Send Inquiry</span>
+            <span class="vai-submit-label"><?php echo esc_html($contact_form_submit); ?></span>
             <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
           <div id="vaiFormStatus" class="vai-form-status" role="status" aria-live="polite"></div>
@@ -93,7 +139,7 @@ get_header();
 
         <noscript>
           <p style="margin-top:24px; padding:14px 18px; background:var(--cream); border-radius:10px; font-size:14px;">
-            JavaScript is disabled. Email us directly at <a href="mailto:hello@virtualassistant.id"><strong>hello@virtualassistant.id</strong></a> or use the WhatsApp button.
+            JavaScript is disabled. Email us directly at <a href="<?php echo esc_url($email_link); ?>"><strong><?php echo esc_html($contact_email); ?></strong></a> or use the WhatsApp button.
           </p>
         </noscript>
       </div>
@@ -106,8 +152,8 @@ get_header();
           </div>
           <div>
             <div class="contact-card-label">WhatsApp</div>
-            <a class="contact-card-value" href="https://wa.me/6281234567890" target="_blank" rel="noopener">+62 812 3456 7890</a>
-            <div class="contact-card-meta">Fastest reply · 9am–7pm WIB</div>
+            <a class="contact-card-value" href="<?php echo esc_url($wa_url); ?>" target="_blank" rel="noopener"><?php echo esc_html($contact_phone); ?></a>
+            <div class="contact-card-meta">Fastest reply · <?php echo esc_html($contact_hours); ?></div>
           </div>
         </div>
 
@@ -117,7 +163,7 @@ get_header();
           </div>
           <div>
             <div class="contact-card-label">Email</div>
-            <a class="contact-card-value" href="mailto:hello@virtualassistant.id">hello@virtualassistant.id</a>
+            <a class="contact-card-value" href="<?php echo esc_url($email_link); ?>"><?php echo esc_html($contact_email); ?></a>
             <div class="contact-card-meta">Reply within 1 business day</div>
           </div>
         </div>
@@ -128,7 +174,9 @@ get_header();
           </div>
           <div>
             <div class="contact-card-label">Head office</div>
-            <div class="contact-card-value">Jl. Tanah Kusir 2, Arteri Pondok Indah<br>Jakarta Selatan, Indonesia</div>
+            <div class="contact-card-value">
+              <?php foreach ( $address_lines as $line ) echo esc_html( $line ) . '<br>'; ?>
+            </div>
             <div class="contact-card-meta">By appointment only</div>
           </div>
         </div>
@@ -153,18 +201,17 @@ get_header();
 
         <div class="contact-faq">
           <span class="eyebrow">Quick answers</span>
+          <?php foreach ( $contact_faq as $idx => $qa ) :
+            $i = $idx + 1;
+            $d = $contact_faq_defaults[$i-1] ?? ['',''];
+            $q = $qa['q'] !== '' ? $qa['q'] : $d[0];
+            $a = $qa['a'] !== '' ? $qa['a'] : $d[1];
+          ?>
           <details class="contact-faq-item">
-            <summary>How quickly do you reply?</summary>
-            <p>Within 1 business day, usually the same day. WhatsApp replies typically within 2 hours during business hours (9am–7pm WIB).</p>
+            <summary><?php echo esc_html($q); ?></summary>
+            <p><?php echo esc_html($a); ?></p>
           </details>
-          <details class="contact-faq-item">
-            <summary>Do you sign NDAs?</summary>
-            <p>Yes, before kickoff for every engagement. Standard mutual NDA or your template, whichever you prefer.</p>
-          </details>
-          <details class="contact-faq-item">
-            <summary>What's the minimum commitment?</summary>
-            <p>None. On Demand plans are month-to-month. Cancel any time with 30 days notice, no questions asked.</p>
-          </details>
+          <?php endforeach; ?>
         </div>
       </aside>
     </div>
@@ -173,9 +220,9 @@ get_header();
 
 <section class="cta-band">
   <div class="container">
-    <h2>Prefer to <em>book a call</em>?</h2>
-    <p style="margin:18px auto 32px;">Pick a time directly via our scheduling form. 30 minutes, free, no obligation.</p>
-    <a href="https://form.jotform.com/202773574256057" target="_blank" rel="noopener" class="btn btn--cream btn--lg">Book a Free Consultation
+    <h2><?php echo esc_html($contact_cta_pre); ?> <em><?php echo esc_html($contact_cta_em); ?></em><?php echo esc_html($contact_cta_post); ?></h2>
+    <p style="margin:18px auto 32px;"><?php echo esc_html($contact_cta_sub); ?></p>
+    <a href="<?php echo esc_url($contact_cta_url); ?>" target="_blank" rel="noopener" class="btn btn--cream btn--lg"><?php echo esc_html($contact_cta_button); ?>
       <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
@@ -218,7 +265,6 @@ a.contact-card-value:hover { color: var(--teal); }
 .contact-social-row a { width: 38px; height: 38px; border-radius: 10px; background: var(--cream); color: var(--navy); display: flex; align-items: center; justify-content: center; transition: background .2s, color .2s; }
 .contact-social-row a:hover { background: var(--navy); color: var(--cream); }
 
-/* Quick answers (collapsible) */
 .contact-faq { margin-top: 6px; padding: 20px 22px; background: var(--cream); border-radius: 14px; }
 .contact-faq .eyebrow { display: block; margin-bottom: 14px; }
 .contact-faq-item { border-top: 1px solid var(--line); padding: 14px 0; }
