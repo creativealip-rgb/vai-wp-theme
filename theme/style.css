@@ -1198,7 +1198,7 @@ h1 em, h2 em, h3 em {
 }
 .price-card.is-featured .price-features li { color: var(--text-body); }
 .price-card.is-featured .price-features li::before {
-  background: var(--bg-progress);
+  background-color: var(--bg-progress);
   border-color: var(--status-progress);
 }
 .price-cta {

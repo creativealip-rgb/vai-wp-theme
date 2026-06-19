@@ -499,27 +499,30 @@ $cta_meta = vai_f('home_cta_meta', 'No credit card required · Reply within 1 bu
       <button class="is-active" data-plan="ondemand"><?php echo esc_html($rates_tier_od); ?></button>
       <button data-plan="dedicated"><?php echo esc_html($rates_tier_de); ?></button>
     </div>
-    <div class="pricing-grid" data-grid="ondemand">
-      <?php
-      $plan_meta_defaults = [
-        1 => ['Starter',  '5<small>hrs</small>',  'Rp 1.500.000 / month', 'Rp 14.400.000 / year',  '',  ['Small errands & quick tasks','Personal projects','Email & WhatsApp support','Same-day reply window']],
-        2 => ['Executive','12<small>hrs</small>', 'Rp 2.600.000 / month', 'Rp 24.960.000 / year',  'Best Option', ['Executive support tasks','Time-consuming workflows','Priority response (< 2h)','Weekly status report']],
-        3 => ['Operator', '24<small>hrs</small>', 'Rp 4.200.000 / month', 'Rp 40.320.000 / year',  '',  ['Day-to-day operations','High-demand workloads','Dedicated VA matching','Daily updates included']],
-        4 => ['Team',     '40<small>hrs</small>', 'Rp 6.000.000 / month', 'Rp 57.600.000 / year',  '',  ['Project assistance','Beyond inbox & scheduling','Streamlined project mgmt','On-time delivery focus','Up to 3 team members']],
-        5 => ['Growth',   '60<small>hrs</small>', 'Rp 6.800.000 / month', 'Rp 65.280.000 / year',  'Most Popular', ['Delegate full workload','Expert-level assistance','Strategy execution support','Bi-weekly review calls','Up to 6 team members']],
-        6 => ['Enterprise','100<small>hrs</small>','Rp 12.500.000 / month','Rp 120.000.000 / year','' ,['Premium ongoing service','Larger team coverage','Comprehensive support','Dedicated account manager','1 division or department']],
-      ];
-      for ( $i = 1; $i <= 6; $i++ ) :
-        $p = $rates_plans[$i-1];
-        $d = $plan_meta_defaults[$i];
-        $name    = $p['name']    !== '' ? $p['name']    : $d[0];
-        $hours   = $p['hours']   !== '' ? $p['hours']   : $d[1];
-        $monthly = $p['monthly'] !== '' ? $p['monthly'] : $d[2];
-        $annual  = $p['annual']  !== '' ? $p['annual']  : $d[3];
-        $badge   = $p['badge']   !== '' ? $p['badge']   : $d[4];
-        $feats   = !empty($p['feats']) ? $p['feats'] : $d[5];
-        $is_featured = ( $i === 2 || $i === 5 );
-      ?>
+    <?php
+    $plan_meta_defaults = [
+      1 => ['Starter',  '5<small>hrs</small>',  'Rp 1.500.000 / month', 'Rp 14.400.000 / year',  '',  ['Small errands & quick tasks','Personal projects','Email & WhatsApp support','Same-day reply window']],
+      2 => ['Executive','12<small>hrs</small>', 'Rp 2.600.000 / month', 'Rp 24.960.000 / year',  'Best Option', ['Executive support tasks','Time-consuming workflows','Priority response (< 2h)','Weekly status report']],
+      3 => ['Operator', '24<small>hrs</small>', 'Rp 4.200.000 / month', 'Rp 40.320.000 / year',  '',  ['Day-to-day operations','High-demand workloads','Dedicated VA matching','Daily updates included']],
+      4 => ['Team',     '40<small>hrs</small>', 'Rp 6.000.000 / month', 'Rp 57.600.000 / year',  '',  ['Project assistance','Beyond inbox & scheduling','Streamlined project mgmt','On-time delivery focus','Up to 3 team members']],
+      5 => ['Growth',   '60<small>hrs</small>', 'Rp 6.800.000 / month', 'Rp 65.280.000 / year',  'Most Popular', ['Delegate full workload','Expert-level assistance','Strategy execution support','Bi-weekly review calls','Up to 6 team members']],
+      6 => ['Enterprise','100<small>hrs</small>','Rp 12.500.000 / month','Rp 120.000.000 / year','' ,['Premium ongoing service','Larger team coverage','Comprehensive support','Dedicated account manager','1 division or department']],
+    ];
+    $plan_featured_idx = [2, 5]; // Executive + Growth
+    /**
+     * Render a single price card. Uses $rates_plans + $plan_meta_defaults in scope.
+     */
+    $vai_render_price_card = function( $idx ) use ( &$rates_plans, &$plan_meta_defaults, &$plan_featured_idx ) {
+      $p = $rates_plans[ $idx - 1 ];
+      $d = $plan_meta_defaults[ $idx ];
+      $name    = $p['name']    !== '' ? $p['name']    : $d[0];
+      $hours   = $p['hours']   !== '' ? $p['hours']   : $d[1];
+      $monthly = $p['monthly'] !== '' ? $p['monthly'] : $d[2];
+      $annual  = $p['annual']  !== '' ? $p['annual']  : $d[3];
+      $badge   = $p['badge']   !== '' ? $p['badge']   : $d[4];
+      $feats   = ! empty( $p['feats'] ) ? $p['feats'] : $d[5];
+      $is_featured = in_array( $idx, $plan_featured_idx, true );
+    ?>
       <div class="price-card <?php echo $is_featured ? 'is-featured' : ''; ?>">
         <?php if ( $badge ) : ?>
         <span class="price-badge"><?php echo esc_html($badge); ?></span>
@@ -534,6 +537,16 @@ $cta_meta = vai_f('home_cta_meta', 'No credit card required · Reply within 1 bu
         </ul>
         <a href="/contact-us/" class="price-cta">Get Started</a>
       </div>
+    <?php };
+    ?>
+    <div class="pricing-grid" data-grid="ondemand">
+      <?php for ( $i = 1; $i <= 3; $i++ ) : ?>
+        <?php $vai_render_price_card( $i ); ?>
+      <?php endfor; ?>
+    </div>
+    <div class="pricing-grid" data-grid="dedicated" style="display:none;">
+      <?php for ( $i = 4; $i <= 6; $i++ ) : ?>
+        <?php $vai_render_price_card( $i ); ?>
       <?php endfor; ?>
     </div>
     <p style="margin-top:48px; font-size:14px; color:var(--ink-soft);"><?php echo esc_html($rates_custom); ?></p>

@@ -21,10 +21,10 @@ add_action('after_setup_theme', 'vai_theme_setup');
 function vai_enqueue_assets() {
     // ClickUp display fonts + Cormorant Garamond for editorial italic accents (boutique warmth)
     wp_enqueue_style('vai-google-fonts', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;650;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap', array(), null);
-    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '5.1');
-    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '5.1', true);
+    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '5.2');
+    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '5.2', true);
     if (is_page('contact-us')) {
-        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '5.1', true);
+        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '5.2', true);
         wp_localize_script('vai-contact', 'VAI_CONTACT', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('vai_contact'),
