@@ -21,10 +21,10 @@ add_action('after_setup_theme', 'vai_theme_setup');
 function vai_enqueue_assets() {
     // ClickUp display fonts + Cormorant Garamond for editorial italic accents (boutique warmth)
     wp_enqueue_style('vai-google-fonts', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;650;700&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap', array(), null);
-    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '5.0');
-    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '5.0', true);
+    wp_enqueue_style('vai-theme', get_stylesheet_uri(), array('vai-google-fonts'), '5.1');
+    wp_enqueue_script('vai-theme', get_theme_file_uri('assets/vai.js'), array(), '5.1', true);
     if (is_page('contact-us')) {
-        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '5.0', true);
+        wp_enqueue_script('vai-contact', get_theme_file_uri('assets/contact.js'), array(), '5.1', true);
         wp_localize_script('vai-contact', 'VAI_CONTACT', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce'   => wp_create_nonce('vai_contact'),
@@ -54,6 +54,29 @@ add_action('wp_enqueue_scripts', 'vai_enqueue_assets');
 
 // ACF: setup, field groups, helpers
 require_once get_stylesheet_directory() . '/inc/acf-setup.php';
+
+/* URL ADAPT — make home_url/site_url return current request host
+ * --------------------------------------------------------------
+ * Production canonical: https://vai.168-144-37-19.sslip.io (set in wp-config)
+ * Local dev:           http://localhost:8091
+ *
+ * When the user accesses via SSLIP domain, every home_url() / site_url() call
+ * must return the SSLIP URL. When accessed via localhost:8091, return that.
+ * This filter overrides the canonical config based on the actual request host.
+ */
+if ( ! function_exists( 'vai_adapt_url_to_request' ) ) {
+    function vai_adapt_url_to_request( $url, $path = '', $scheme = null ) {
+        if ( empty( $_SERVER['HTTP_HOST'] ) ) return $url;
+        $req_host = strtolower( $_SERVER['HTTP_HOST'] );
+        $url_host = strtolower( (string) parse_url( $url, PHP_URL_HOST ) );
+        if ( $url_host === $req_host ) return $url;
+        // Detect scheme from current request — keep HTTPS if request was https
+        $proto = ( ! empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ? 'https' : 'http';
+        return $proto . '://' . $req_host . '/' . ltrim( (string) $path, '/' );
+    }
+}
+add_filter( 'home_url',  'vai_adapt_url_to_request', 10, 2 );
+add_filter( 'site_url',  'vai_adapt_url_to_request', 10, 2 );
 
 // Helper: get ACF field with fallback. Returns $default if field empty/missing.
 // Use in templates: echo vai_f('home_hero_title', 'Your trusted assistant.');
